@@ -1,6 +1,10 @@
+pos-ui
 
+จากการทำ 2 repo แยกกันระหว่าง pos-center กับ pos-cashier แต่ต้องการให้มี component ต่างๆเหมือนกันเป็น theme เดียวกันจึงเป็นวัตถุประสงค์ของ repo นี้เพื่อให้เรียกนำไปใช้ซ้ำได้ตาม design system และเปลี่ยน theme โดยใช้ design token
 
-
+- repo ที่เรียกใช้
+  - pos-center
+  - pos-cashier
 
 ---
 
