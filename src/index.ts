@@ -6,6 +6,9 @@ export type { Theme } from './theme';
 export { primitives, semantics, lightSemantics, components, lightComponents } from './tokens/colors';
 
 // Components
+export { Sidebar } from './components/Sidebar';
+export type { SidebarProps, SidebarNavItem, SidebarUser } from './components/Sidebar';
+
 export { Badge } from './components/Badge';
 export type { BadgeVariant, BadgeShape, BadgeSize } from './components/Badge';
 
