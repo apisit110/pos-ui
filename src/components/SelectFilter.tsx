@@ -42,7 +42,7 @@ export interface SelectFilterOption {
   value: string;
 }
 
-interface SelectFilterProps {
+interface SelectFilterProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> {
   label: string;
   value: string;
   onChange: (value: string) => void;
@@ -50,10 +50,10 @@ interface SelectFilterProps {
   placeholder?: string;
 }
 
-export const SelectFilter: React.FC<SelectFilterProps> = ({ label, value, onChange, options, placeholder }) => (
+export const SelectFilter: React.FC<SelectFilterProps> = ({ label, value, onChange, options, placeholder, ...rest }) => (
   <Group>
     <Label>{label}</Label>
-    <Select value={value} onChange={(e) => onChange(e.target.value)}>
+    <Select value={value} onChange={(e) => onChange(e.target.value)} {...rest}>
       {placeholder && <option value="">{placeholder}</option>}
       {options.map((opt) => (
         <option key={opt.value} value={opt.value}>{opt.label}</option>
