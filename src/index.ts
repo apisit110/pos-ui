@@ -41,3 +41,6 @@ export { SelectFilter } from './components/SelectFilter';
 export type { SelectFilterOption } from './components/SelectFilter';
 
 export { TextFilter } from './components/TextFilter';
+
+export { TopBar } from './components/TopBar';
+export type { TopBarProps } from './components/TopBar';
