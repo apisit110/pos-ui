@@ -1,19 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-const Group = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const Label = styled.label`
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.semantics.colors.text.secondary};
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-`;
+import { FilterGroup, FilterLabel } from './shared';
 
 const Select = styled.select`
   background: rgba(255, 255, 255, 0.03);
@@ -51,13 +38,13 @@ interface SelectFilterProps extends Omit<React.SelectHTMLAttributes<HTMLSelectEl
 }
 
 export const SelectFilter: React.FC<SelectFilterProps> = ({ label, value, onChange, options, placeholder, ...rest }) => (
-  <Group>
-    <Label>{label}</Label>
+  <FilterGroup>
+    <FilterLabel>{label}</FilterLabel>
     <Select value={value} onChange={(e) => onChange(e.target.value)} {...rest}>
       {placeholder && <option value="">{placeholder}</option>}
       {options.map((opt) => (
         <option key={opt.value} value={opt.value}>{opt.label}</option>
       ))}
     </Select>
-  </Group>
+  </FilterGroup>
 );

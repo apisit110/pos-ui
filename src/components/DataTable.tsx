@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { ChevronDownIcon, ChevronFirstIcon, ChevronPrevIcon, ChevronNextIcon, ChevronLastIcon } from './shared/icons';
 
 const shimmer = keyframes`
   0% { background-position: -200% 0; }
@@ -312,9 +313,7 @@ export function DataTable<T>({
                     <option key={size} value={size}>{size}</option>
                   ))}
                 </select>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
+                <ChevronDownIcon />
               </div>
             </RowsPerPage>
             <PageRange>
@@ -324,15 +323,10 @@ export function DataTable<T>({
 
           <PageControls>
             <IconButton onClick={() => onPageChange(1)} disabled={currentPage === 1} title="First Page">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="11 17 6 12 11 7"></polyline>
-                <polyline points="18 17 13 12 18 7"></polyline>
-              </svg>
+              <ChevronFirstIcon />
             </IconButton>
             <IconButton onClick={() => onPageChange(Math.max(1, currentPage - 1))} disabled={currentPage === 1} title="Previous Page">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
+              <ChevronPrevIcon />
             </IconButton>
 
             {(() => {
@@ -360,15 +354,10 @@ export function DataTable<T>({
             })()}
 
             <IconButton onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))} disabled={currentPage === totalPages} title="Next Page">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
+              <ChevronNextIcon />
             </IconButton>
             <IconButton onClick={() => onPageChange(totalPages)} disabled={currentPage === totalPages} title="Last Page">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="13 17 18 12 13 7"></polyline>
-                <polyline points="6 17 11 12 6 7"></polyline>
-              </svg>
+              <ChevronLastIcon />
             </IconButton>
           </PageControls>
         </PaginationContainer>
