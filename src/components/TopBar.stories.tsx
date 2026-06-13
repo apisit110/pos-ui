@@ -17,11 +17,21 @@ export const Default: Story = {
   },
 }
 
+export const WithUser: Story = {
+  args: {
+    title: 'Dashboard',
+    userName: 'John Doe',
+    userRole: 'Cashier',
+  },
+}
+
 export const WithThemeToggle: Story = {
   args: {
     title: 'Dashboard',
     themeMode: 'light',
     onThemeToggle: fn(),
+    userName: 'John Doe',
+    userRole: 'Cashier',
   },
 }
 
@@ -30,6 +40,8 @@ export const DarkMode: Story = {
     title: 'Orders',
     themeMode: 'dark',
     onThemeToggle: fn(),
+    userName: 'Jane Smith',
+    userRole: 'Manager',
   },
 }
 

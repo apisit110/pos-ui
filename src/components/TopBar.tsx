@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SunIcon, MoonIcon } from './shared/icons';
+import { SunIcon, MoonIcon, UserIcon } from './shared/icons';
 
 export interface TopBarProps {
   title: string;
   themeMode?: 'light' | 'dark';
   onThemeToggle?: () => void;
+  userName?: string;
+  userRole?: string;
 }
 
 const Container = styled.header`
@@ -57,16 +59,47 @@ const IconButton = styled.button`
   }
 `;
 
-const Avatar = styled.div`
+const AvatarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+`;
+
+const AvatarCircle = styled.div`
   width: ${({ theme }) => theme.sizes.icon.avatar};
   height: ${({ theme }) => theme.sizes.icon.avatar};
   background: ${({ theme }) => theme.semantics.colors.bg.main};
   border: 1px solid ${({ theme }) => theme.semantics.colors.border.subtle};
   border-radius: ${({ theme }) => theme.borderRadius.full};
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.semantics.colors.text.secondary};
+`;
+
+const AvatarLabels = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const AvatarName = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
+  color: ${({ theme }) => theme.semantics.colors.text.primary};
+  line-height: 1.2;
+`;
+
+const AvatarRole = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSize.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.regular};
+  color: ${({ theme }) => theme.semantics.colors.text.secondary};
+  line-height: 1.2;
 `;
 
 
-export const TopBar: React.FC<TopBarProps> = ({ title, themeMode, onThemeToggle }) => (
+export const TopBar: React.FC<TopBarProps> = ({ title, themeMode, onThemeToggle, userName, userRole }) => (
   <Container>
     <Title>{title}</Title>
     <Actions>
@@ -75,7 +108,15 @@ export const TopBar: React.FC<TopBarProps> = ({ title, themeMode, onThemeToggle 
           {themeMode === 'dark' ? <SunIcon /> : <MoonIcon />}
         </IconButton>
       )}
-      <Avatar />
+      {(userName || userRole) && (
+        <AvatarWrapper>
+          <AvatarCircle><UserIcon /></AvatarCircle>
+          <AvatarLabels>
+            {userName && <AvatarName>{userName}</AvatarName>}
+            {userRole && <AvatarRole>{userRole}</AvatarRole>}
+          </AvatarLabels>
+        </AvatarWrapper>
+      )}
     </Actions>
   </Container>
 );
