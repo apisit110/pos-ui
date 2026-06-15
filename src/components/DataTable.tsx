@@ -179,10 +179,12 @@ const PageNumber = styled.button<{ $active?: boolean }>`
 
 export interface Column<T> {
   header: string;
+  subHeader?: string;
   key: string;
   width?: string;
   textAlign?: 'left' | 'center' | 'right';
   render?: (item: T) => React.ReactNode;
+  subRender?: (item: T) => React.ReactNode;
 }
 
 interface DataTableProps<T> {
@@ -243,7 +245,12 @@ export function DataTable<T>({
                   textAlign: col.textAlign || 'left',
                 }}
               >
-                {col.header}
+                <div>{col.header}</div>
+                {col.subHeader && (
+                  <div style={{ fontWeight: 400, textTransform: 'none', letterSpacing: 0, marginTop: '2px', opacity: 0.7 }}>
+                    {col.subHeader}
+                  </div>
+                )}
               </th>
             ))}
           </tr>
@@ -280,7 +287,12 @@ export function DataTable<T>({
                       key={`${key}-${col.key}`}
                       style={{ textAlign: col.textAlign || 'left' }}
                     >
-                      {col.render ? col.render(item) : (item as any)[col.key]}
+                      <div>{col.render ? col.render(item) : (item as any)[col.key]}</div>
+                      {col.subRender && (
+                        <div style={{ marginTop: '2px', fontSize: '0.75rem', opacity: 0.6 }}>
+                          {col.subRender(item)}
+                        </div>
+                      )}
                     </td>
                   ))}
                 </tr>
