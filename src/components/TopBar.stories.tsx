@@ -45,6 +45,32 @@ export const DarkMode: Story = {
   },
 }
 
+export const WithLanguageToggle: Story = {
+  args: {
+    title: 'Dashboard',
+    language: 'en',
+    onLanguageToggle: fn(),
+    userName: 'John Doe',
+    userRole: 'Cashier',
+  },
+}
+
+const LanguageToggleExample = () => {
+  const [lang, setLang] = useState<'en' | 'th'>('en')
+  return (
+    <TopBar
+      title="Interactive Toggle"
+      language={lang}
+      onLanguageToggle={() => setLang(l => (l === 'en' ? 'th' : 'en'))}
+    />
+  )
+}
+
+export const InteractiveLanguageToggle: Story = {
+  args: { title: 'Interactive Toggle' },
+  render: () => <LanguageToggleExample />,
+}
+
 const ThemeToggleExample = () => {
   const [mode, setMode] = useState<'light' | 'dark'>('light')
   return (

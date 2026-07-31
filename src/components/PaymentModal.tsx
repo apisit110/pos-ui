@@ -265,7 +265,6 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
       setCountdown(prev => {
         if (prev <= 1) {
           clearInterval(timer);
-          handleComplete();
           return 0;
         }
         return prev - 1;
@@ -285,6 +284,13 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
       window.removeEventListener('keydown', handleSuccessKeyDown);
     };
   }, [step]);
+
+  useEffect(() => {
+    if (step === 'success' && countdown === 0) {
+      const id = setTimeout(() => handleComplete(), 0);
+      return () => clearTimeout(id);
+    }
+  }, [countdown, step]);
 
   const currentReceived = parseFloat(cashReceived);
   const currentChange = !isNaN(currentReceived) ? Math.max(0, currentReceived - totalAmount) : 0;

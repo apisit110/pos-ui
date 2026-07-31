@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SunIcon, MoonIcon, UserIcon } from './shared/icons';
+import { SunIcon, MoonIcon, LanguageIcon, UserIcon } from './shared/icons';
 
 export interface TopBarProps {
   title: string;
   themeMode?: 'light' | 'dark';
   onThemeToggle?: () => void;
+  language?: string;
+  onLanguageToggle?: () => void;
   userName?: string;
   userRole?: string;
 }
@@ -98,11 +100,68 @@ const AvatarRole = styled.span`
   line-height: 1.2;
 `;
 
+const LanguageButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
+  height: ${({ theme }) => theme.sizes.icon.avatar};
+  padding: 0 ${({ theme }) => theme.spacing.md};
+  border: 1px solid ${({ theme }) => theme.semantics.colors.border.subtle};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  background: transparent;
+  color: ${({ theme }) => theme.semantics.colors.text.secondary};
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.default};
 
-export const TopBar: React.FC<TopBarProps> = ({ title, themeMode, onThemeToggle, userName, userRole }) => (
+  &:hover {
+    border-color: ${({ theme }) => theme.semantics.colors.accent.primary};
+    color: ${({ theme }) => theme.semantics.colors.accent.primary};
+    background: ${({ theme }) => theme.semantics.colors.accent.subtleBg};
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+`;
+
+const FlagEmoji = styled.span`
+  font-size: 18px;
+  line-height: 1;
+`;
+
+const LanguageLabel = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
+  line-height: 1;
+`;
+
+const LANGUAGE_FLAGS: Record<string, string> = {
+  en: '🇺🇸',
+  th: '🇹🇭',
+  ja: '🇯🇵',
+  zh: '🇨🇳',
+  ko: '🇰🇷',
+  fr: '🇫🇷',
+  de: '🇩🇪',
+  es: '🇪🇸',
+};
+
+
+export const TopBar: React.FC<TopBarProps> = ({ title, themeMode, onThemeToggle, language, onLanguageToggle, userName, userRole }) => (
   <Container>
     <Title>{title}</Title>
     <Actions>
+      {onLanguageToggle && (
+        <LanguageButton onClick={onLanguageToggle} aria-label="Switch language">
+          {language && LANGUAGE_FLAGS[language] ? (
+            <FlagEmoji>{LANGUAGE_FLAGS[language]}</FlagEmoji>
+          ) : (
+            <LanguageIcon />
+          )}
+          {language && <LanguageLabel>{language.toUpperCase()}</LanguageLabel>}
+        </LanguageButton>
+      )}
       {onThemeToggle && (
         <IconButton onClick={onThemeToggle} aria-label="Toggle theme">
           {themeMode === 'dark' ? <SunIcon /> : <MoonIcon />}
