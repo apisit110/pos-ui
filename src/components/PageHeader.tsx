@@ -12,6 +12,7 @@ interface PageHeaderProps {
   onBack?: () => void;
   user?: StaffInfo | null;
   onLogout?: () => void;
+  logoutLabel?: string;
   extraContent?: React.ReactNode;
   showLogo?: boolean;
 }
@@ -133,6 +134,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   onBack,
   user,
   onLogout,
+  logoutLabel = 'Logout',
   extraContent,
   showLogo = true,
 }) => {
@@ -170,7 +172,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         )}
         {onLogout && (
           <Button variant="danger" onClick={onLogout} style={{ width: 'auto' }}>
-            Logout
+            {logoutLabel}
           </Button>
         )}
       </HeaderRight>
