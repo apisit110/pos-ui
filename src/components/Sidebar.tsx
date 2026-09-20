@@ -22,6 +22,7 @@ export interface SidebarProps {
   themeMode?: 'light' | 'dark';
   onThemeToggle?: () => void;
   onLogout?: () => void;
+  logoutLabel?: string;
 }
 
 const Container = styled.aside`
@@ -227,6 +228,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   themeMode,
   onThemeToggle,
   onLogout,
+  logoutLabel = 'Logout',
 }) => (
   <Container>
     <LogoWrapper>
@@ -263,7 +265,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {onLogout && (
           <LogoutButton onClick={onLogout}>
             <LogoutIcon />
-            <span className="label">Logout</span>
+            <span className="label">{logoutLabel}</span>
           </LogoutButton>
         )}
       </ProfileSection>
