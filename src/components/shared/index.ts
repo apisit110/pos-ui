@@ -48,3 +48,8 @@ export const FieldErrorText = styled.span`
   font-size: 0.75rem;
   color: ${({ theme }) => theme.semantics.colors.text.error};
 `;
+
+export const RequiredMark = styled.span.attrs({ 'aria-hidden': true })`
+  margin-left: 0.25rem;
+  color: ${({ theme }) => theme.semantics.colors.text.error};
+`;

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
-import { InputLabel, FieldErrorText } from './shared';
+import { InputLabel, FieldErrorText, RequiredMark } from './shared';
 import { SearchIcon } from './shared/icons';
 
 interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -70,7 +70,7 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
 
     return (
       <InputGroup>
-        <InputLabel>{label}</InputLabel>
+        <InputLabel>{label}{props.required && <RequiredMark>*</RequiredMark>}</InputLabel>
         <InputWrapper>
           <InputControl
             ref={ref}

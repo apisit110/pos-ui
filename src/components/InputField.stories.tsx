@@ -120,3 +120,14 @@ export const PasswordVisibilityToggle: Story = {
     await expect(input).toHaveAttribute('type', 'text')
   },
 }
+
+export const Required: Story = {
+  args: {
+    label: 'Username',
+    placeholder: 'Enter username',
+    required: true,
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('*')).toBeVisible()
+  },
+}

@@ -21,6 +21,9 @@ export type { Column } from './components/DataTable';
 
 export { DateFilter } from './components/DateFilter';
 
+export { DateRangeFilter } from './components/DateRangeFilter';
+export type { DateRange } from './components/DateRangeFilter';
+
 export { FilterBar } from './components/FilterBar';
 
 export { InputField } from './components/InputField';
