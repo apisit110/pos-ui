@@ -43,7 +43,10 @@ export { PinInputField } from './components/PinInputField';
 export { SelectFilter } from './components/SelectFilter';
 export type { SelectFilterOption } from './components/SelectFilter';
 
-export { TextFilter } from './components/TextFilter';
+export { StatusTimeline } from './components/StatusTimeline';
+export type { TimelineStep } from './components/StatusTimeline';
+
+export { TextFilter }from './components/TextFilter';
 
 export { TopBar } from './components/TopBar';
 export type { TopBarProps } from './components/TopBar';

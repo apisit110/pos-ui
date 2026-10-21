@@ -35,6 +35,10 @@ export const primitives = {
     emerald: {
       500: '#10b981',
     },
+    amber: {
+      400: '#fbbf24',
+      600: '#d97706',
+    },
   },
   typography: {
     fontFamily: {
@@ -115,6 +119,16 @@ export const semantics = {
         softBg: 'rgba(99, 102, 241, 0.1)',
         softBorder: 'rgba(99, 102, 241, 0.2)',
       },
+      warning: {
+        text: primitives.colors.amber[400],
+        softBg: 'rgba(234, 179, 8, 0.1)',
+        softBorder: 'rgba(234, 179, 8, 0.2)',
+      },
+      neutral: {
+        text: primitives.colors.slate[400],
+        softBg: 'rgba(148, 163, 184, 0.1)',
+        softBorder: 'rgba(148, 163, 184, 0.2)',
+      },
     },
   },
   effects: {
@@ -162,6 +176,16 @@ export const lightSemantics = {
         softBg: 'rgba(99, 102, 241, 0.1)',
         softBorder: 'rgba(99, 102, 241, 0.2)',
       },
+      warning: {
+        text: primitives.colors.amber[600],
+        softBg: 'rgba(234, 179, 8, 0.1)',
+        softBorder: 'rgba(234, 179, 8, 0.2)',
+      },
+      neutral: {
+        text: primitives.colors.slate[500],
+        softBg: 'rgba(148, 163, 184, 0.1)',
+        softBorder: 'rgba(148, 163, 184, 0.2)',
+      },
     },
   },
   effects: {
@@ -195,6 +219,8 @@ export const lightComponents = {
     success: lightSemantics.colors.status.success,
     error: lightSemantics.colors.status.error,
     info: lightSemantics.colors.status.info,
+    warning: lightSemantics.colors.status.warning,
+    neutral: lightSemantics.colors.status.neutral,
   },
   navItem: {
     activeBg: lightSemantics.colors.accent.subtleBg,
@@ -235,6 +261,8 @@ export const components = {
     success: semantics.colors.status.success,
     error: semantics.colors.status.error,
     info: semantics.colors.status.info,
+    warning: semantics.colors.status.warning,
+    neutral: semantics.colors.status.neutral,
   },
   navItem: {
     activeBg: semantics.colors.accent.subtleBg,

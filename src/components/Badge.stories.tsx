@@ -25,6 +25,14 @@ export const Info: Story = {
   args: { $variant: 'info', children: 'Pending' },
 }
 
+export const Warning: Story = {
+  args: { $variant: 'warning', children: 'Pending' },
+}
+
+export const Neutral: Story = {
+  args: { $variant: 'neutral', children: 'Unknown' },
+}
+
 export const Pill: Story = {
   args: { $shape: 'pill' },
 }

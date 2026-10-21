@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export type BadgeVariant = 'success' | 'error' | 'info';
+export type BadgeVariant = 'success' | 'error' | 'info' | 'warning' | 'neutral';
 export type BadgeShape = 'square' | 'pill';
 export type BadgeSize = 'sm' | 'md';
 
