@@ -24,6 +24,9 @@ export { DateFilter } from './components/DateFilter';
 export { DateRangeFilter } from './components/DateRangeFilter';
 export type { DateRange } from './components/DateRangeFilter';
 
+export { FileDropZone } from './components/FileDropZone';
+export type { FileDropZoneProps } from './components/FileDropZone';
+
 export { FilterBar } from './components/FilterBar';
 
 export { InputField } from './components/InputField';
