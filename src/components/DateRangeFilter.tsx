@@ -7,10 +7,12 @@ export interface DateRange {
   end: string;
 }
 
-interface DateRangeFilterProps {
+export interface DateRangeFilterProps {
   label: string;
   value: DateRange;
   required?: boolean;
+  min?: string;
+  max?: string;
   onChange: (value: DateRange) => void;
 }
 
@@ -47,7 +49,7 @@ const Separator = styled.span`
   font-size: 0.875rem;
 `;
 
-export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ label, value, onChange, required }) => (
+export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ label, value, onChange, required, min, max }) => (
   <FilterGroup role="group" aria-label={label}>
     <FilterLabel as="span">{label}{required && <RequiredMark>*</RequiredMark>}</FilterLabel>
     <RangeBox>
@@ -56,7 +58,8 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ label, value, 
         aria-label={`${label} start`}
         required={required}
         value={value.start}
-        max={value.end || undefined}
+        min={min}
+        max={value.end || max}
         onChange={(e) => onChange({ ...value, start: e.target.value })}
       />
       <Separator aria-hidden>→</Separator>
@@ -65,7 +68,8 @@ export const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ label, value, 
         aria-label={`${label} end`}
         required={required}
         value={value.end}
-        min={value.start || undefined}
+        min={value.start || min}
+        max={max}
         onChange={(e) => onChange({ ...value, end: e.target.value })}
       />
     </RangeBox>

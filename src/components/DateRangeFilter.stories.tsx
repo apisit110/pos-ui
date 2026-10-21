@@ -35,6 +35,16 @@ export const WithValue: Story = {
   },
 }
 
+export const WithMinMax: Story = {
+  args: { min: '2025-01-01', max: '2025-12-31' },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByLabelText('Date start')).toHaveAttribute('min', '2025-01-01')
+    await expect(canvas.getByLabelText('Date start')).toHaveAttribute('max', '2025-12-31')
+    await expect(canvas.getByLabelText('Date end')).toHaveAttribute('min', '2025-01-01')
+    await expect(canvas.getByLabelText('Date end')).toHaveAttribute('max', '2025-12-31')
+  },
+}
+
 export const Required: Story = {
   args: { required: true },
   play: async ({ canvas }) => {
