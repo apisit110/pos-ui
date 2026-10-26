@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 const PinInputGroup = styled.div`
@@ -54,6 +54,11 @@ export const PinInput: React.FC<PinInputProps> = ({
   masked,
 }) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+
+  // Roving tabindex: only one box is in the tab order, so Tab leaves the group
+  const firstEmptyIndex = Array.from({ length }).findIndex((_, i) => !value[i]);
+  const tabbableIndex = focusedIndex ?? (firstEmptyIndex === -1 ? length - 1 : firstEmptyIndex);
 
   useEffect(() => {
     inputRefs.current = inputRefs.current.slice(0, length);
@@ -63,20 +68,34 @@ export const PinInput: React.FC<PinInputProps> = ({
     const char = e.target.value.slice(-1);
     if (!/^\d*$/.test(char)) return;
 
+    // Typing past the filled digits appends right after the last one, never leaving gaps
+    const targetIndex = Math.min(index, value.length);
+    if (targetIndex >= length) return;
+
     const newValue = value.split('');
-    newValue[index] = char;
+    newValue[targetIndex] = char;
     const finalValue = newValue.join('');
 
     onChange(finalValue);
 
-    if (char && index < length - 1) {
-      inputRefs.current[index + 1]?.focus();
+    if (char && targetIndex < length - 1) {
+      inputRefs.current[targetIndex + 1]?.focus();
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-    if (e.key === 'Backspace' && !value[index] && index > 0) {
+    if (e.key === 'Backspace') {
+      // Always remove the most recently entered digit, wherever the focus is
+      e.preventDefault();
+      if (!value) return;
+      onChange(value.slice(0, -1));
+      inputRefs.current[value.length - 1]?.focus();
+    } else if (e.key === 'ArrowLeft' && index > 0) {
+      e.preventDefault();
       inputRefs.current[index - 1]?.focus();
+    } else if (e.key === 'ArrowRight' && index < length - 1) {
+      e.preventDefault();
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
@@ -102,6 +121,9 @@ export const PinInput: React.FC<PinInputProps> = ({
           onChange={(e) => handleChange(e, index)}
           onKeyDown={(e) => handleKeyDown(e, index)}
           onPaste={handlePaste}
+          onFocus={() => setFocusedIndex(index)}
+          onBlur={() => setFocusedIndex(null)}
+          tabIndex={index === tabbableIndex ? 0 : -1}
           disabled={disabled}
           $isFilled={!!value[index]}
           $size={boxSize}
