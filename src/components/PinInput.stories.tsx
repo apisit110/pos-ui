@@ -56,3 +56,16 @@ export const RejectsNonDigits: Story = {
     await expect(inputs[0]).toHaveValue('')
   },
 }
+
+export const Masked: Story = {
+  args: { masked: true },
+  play: async ({ canvasElement }) => {
+    const inputs = canvasElement.querySelectorAll<HTMLInputElement>('input')
+    await expect(inputs).toHaveLength(6)
+    for (const input of inputs) await expect(input).toHaveAttribute('type', 'password')
+    await userEvent.type(inputs[0], '12')
+    await expect(inputs[0]).toHaveValue('1')
+    await expect(inputs[1]).toHaveValue('2')
+    await expect(inputs[2]).toHaveFocus()
+  },
+}

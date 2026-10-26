@@ -10,6 +10,7 @@ interface PinInputFieldProps {
   onChange: (value: string) => void;
   disabled?: boolean;
   boxSize?: string;
+  masked?: boolean;
   error?: string;
 }
 
@@ -28,6 +29,7 @@ export const PinInputField: React.FC<PinInputFieldProps> = ({
   onChange,
   disabled,
   boxSize,
+  masked,
   error,
 }) => {
   return (
@@ -39,6 +41,7 @@ export const PinInputField: React.FC<PinInputFieldProps> = ({
         onChange={onChange}
         disabled={disabled}
         boxSize={boxSize}
+        masked={masked}
       />
       {error && <FieldErrorText>{error}</FieldErrorText>}
     </Container>

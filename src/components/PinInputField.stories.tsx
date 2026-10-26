@@ -37,3 +37,7 @@ export const Disabled: Story = {
 export const FourDigits: Story = {
   args: { length: 4 },
 }
+
+export const Masked: Story = {
+  args: { masked: true, value: '1234' },
+}

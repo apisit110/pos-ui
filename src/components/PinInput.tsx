@@ -42,6 +42,7 @@ interface PinInputProps {
   onChange: (value: string) => void;
   disabled?: boolean;
   boxSize?: string;
+  masked?: boolean;
 }
 
 export const PinInput: React.FC<PinInputProps> = ({
@@ -50,6 +51,7 @@ export const PinInput: React.FC<PinInputProps> = ({
   onChange,
   disabled,
   boxSize,
+  masked,
 }) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -93,7 +95,7 @@ export const PinInput: React.FC<PinInputProps> = ({
         <PinDigitInput
           key={index}
           ref={(el) => { inputRefs.current[index] = el; }}
-          type="text"
+          type={masked ? 'password' : 'text'}
           inputMode="numeric"
           maxLength={1}
           value={value[index] || ''}
@@ -103,7 +105,7 @@ export const PinInput: React.FC<PinInputProps> = ({
           disabled={disabled}
           $isFilled={!!value[index]}
           $size={boxSize}
-          autoComplete="one-time-code"
+          autoComplete={masked ? 'off' : 'one-time-code'}
         />
       ))}
     </PinInputGroup>
